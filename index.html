@@ -1,214 +1,517 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>서버 웜업 리서치 및 기술 인프라 저널</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg-color: #ffffff;
-      --text-color: #0f172a;
-      --accent-color: #3b82f6;
-      --muted-color: #64748b;
-      --border-color: #e2e8f0;
-      --font-swiss: 'Inter', 'Noto Sans KR', sans-serif;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="bpaas-design-system" content="editorial-apple">
+    <meta name="bpaas-design-theme" content="kr-noir-gold">
+    
+    <title>마포 셔츠룸의 진화: 마포구 서교동의 노블레스 오블리주 | Momcafe</title>
+    <meta name="description" content="마포 셔츠룸의 기준을 다시 씁니다. 마포구 서교동의 감성, 압도적인 서비스, 그리고 완벽한 룸 환경. 남들과 타협하지 않는 당신을 위한 단 하나뿐의 공간이 여기 있습니다.">
+    <meta name="keywords" content="마포 셔츠룸, 마포구 룸, 서교동 룸, 마포 접대, 마포 비즈니스 미팅, 마포 럭셔리ूम, 마포 데이트">
+    <link rel="canonical" href="https://sf-t3-1779642675702-082.pages.dev">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sf-t3-1779642675702-082.pages.dev">
+    <meta property="og:title" content="마포 셔츠룸의 진화: 마포구 서교동의 노블레스 오블리주">
+    <meta property="og:description" content="마포 셔츠룸의 기준을 다시 씁니다. 평범함은 거부합니다. 오직 완벽함만을 추구하는 당신을 위한 공간.">
+    <meta property="og:image" content="https://via.placeholder.com/1200x630/1a1a1a/c5a880?text=Momcafe+Mapo">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://sf-t3-1779642675702-082.pages.dev">
+    <meta name="twitter:title" content="마포 셔츠룸의 진화: 마포구 서교동의 노블레스 오블리주">
+    <meta name="twitter:description" content="마포 셔츠룸의 기준을 다시 씁니다. 평범함은 거부합니다.">
+    <meta name="twitter:image" content="https://via.placeholder.com/1200x630/1a1a1a/c5a880?text=Momcafe+Mapo">
+
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "NightClub",
+      "name": "Momcafe Mapo",
+      "image": "https://sf-t3-1779642675702-082.pages.dev/assets/hero.jpg",
+      "telephone": "010-6279-0862",
+      "url": "https://sf-t3-1779642675702-082.pages.dev",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "서교동 일대",
+        "addressLocality": "마포구",
+        "addressRegion": "서울",
+        "addressCountry": "KR"
+      },
+      "priceRange": "$$$$",
+      "description": "마포 셔츠룸의 새로운 기준. 최상의 환경과 서비스로 당신의 밤을 완성합니다."
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      font-family: var(--font-swiss);
-      line-height: 1.7;
-      letter-spacing: -0.01em;
-      padding: 0 24px;
-    }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 60px 0;
-    }
-    header {
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 24px;
-      margin-bottom: 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-    }
-    .logo {
-      font-size: 1.25rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      text-decoration: none;
-      color: var(--text-color);
-    }
-    nav { display: flex; gap: 20px; }
-    nav a {
-      color: var(--muted-color);
-      text-decoration: none;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-weight: 600;
-      transition: color 0.2s ease;
-    }
-    nav a:hover { color: var(--accent-color); }
-    main { padding-bottom: 60px; }
-    .meta-tag {
-      font-size: 0.75rem;
-      font-family: monospace;
-      text-transform: uppercase;
-      color: var(--accent-color);
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      margin-bottom: 16px;
-      display: inline-block;
-    }
-    h1 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      line-height: 1.2;
-      letter-spacing: -0.03em;
-      color: var(--text-color);
-      margin-bottom: 32px;
-    }
-    .content {
-      font-size: 1.05rem;
-      color: var(--text-color);
-      margin-bottom: 48px;
-      font-weight: 300;
-    }
-    .content p { margin-bottom: 20px; }
-    .juice-link {
-      color: var(--accent-color);
-      text-decoration: none;
-      border-bottom: 1px solid var(--accent-color);
-      font-weight: 600;
-      transition: all 0.2s ease;
-    }
-    .juice-link:hover {
-      background-color: rgba(59, 130, 246, 0.05);
-    }
-    .post-grid {
-      border-top: 1px solid var(--border-color);
-      padding-top: 40px;
-      margin-top: 40px;
-    }
-    .grid-title {
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--muted-color);
-      margin-bottom: 24px;
-    }
-    .posts-list {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .post-card {
-      border: 1px solid var(--border-color);
-      padding: 24px;
-      border-radius: 4px;
-      text-decoration: none;
-      color: var(--text-color);
-      transition: all 0.2s ease;
-    }
-    .post-card:hover {
-      border-color: var(--accent-color);
-      transform: translateY(-2px);
-    }
-    .post-card h3 {
-      font-size: 1.15rem;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-    .post-card p {
-      font-size: 0.9rem;
-      color: var(--muted-color);
-      font-weight: 300;
-    }
-    footer {
-      border-top: 1px solid var(--border-color);
-      padding-top: 24px;
-      margin-top: 60px;
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.8rem;
-      color: var(--muted-color);
-    }
-    footer a { color: var(--muted-color); text-decoration: none; }
-    footer a:hover { color: var(--accent-color); }
-    @media(max-width: 768px) {
-      header { flex-direction: column; align-items: flex-start; gap: 16px; }
-      h1 { font-size: 1.8rem; }
-    }
-  </style>
+    </script>
+
+    <style>
+        /* 
+         * DESIGN SYSTEM: EDITORIAL LUXURY (NOIR-GOLD) 
+         */
+        :root {
+            --color-bg: #fafaf5;
+            --color-text: #1a1a1a;
+            --color-accent: #c5a880;
+            --color-dark: #0a0a0a;
+            
+            --font-serif: 'Times New Roman', Times, serif;
+            --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            
+            --spacing-unit: 24px;
+            --spacing-section: 120px;
+            --spacing-container: 72px;
+            --max-width: 720px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            font-family: var(--font-serif);
+            line-height: 1.6;
+            font-size: 18px;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--color-accent);
+        }
+
+        /* TYPOGRAPHY */
+        h1, h2, h3, h4 {
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            margin-bottom: var(--spacing-unit);
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: var(--spacing-unit);
+            border-bottom: 1px solid var(--color-accent);
+            padding-bottom: 16px;
+            display: inline-block;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 24px;
+            text-align: justify;
+        }
+
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 4.5rem;
+            line-height: 0.8;
+            padding-right: 12px;
+            padding-top: 4px;
+            color: var(--color-accent);
+            font-family: var(--font-serif);
+        }
+
+        /* LAYOUT UTILS */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 var(--spacing-container);
+        }
+
+        .section {
+            padding: var(--spacing-section) 0;
+        }
+
+        /* HEADER & NAV */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 24px var(--spacing-container);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(250, 250, 245, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .nav-btn {
+            cursor: pointer;
+            width: 40px;
+            height: 20px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .nav-btn span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: var(--color-text);
+            transition: 0.3s;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2b2b2b 100%);
+            color: var(--color-bg);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0,0,0,0.6) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 24px;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-sans);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--color-accent);
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+            display: block;
+        }
+
+        /* BUTTONS */
+        .btn-cta {
+            display: inline-block;
+            margin-top: 48px;
+            padding: 16px 48px;
+            border: 1px solid var(--color-accent);
+            color: var(--color-accent);
+            font-family: var(--font-sans);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+            transition: all 0.4s ease;
+            background: transparent;
+        }
+
+        .btn-cta:hover {
+            background: var(--color-accent);
+            color: var(--color-dark);
+        }
+
+        /* CONTENT STYLES */
+        .editorial-block {
+            margin-bottom: 64px;
+        }
+
+        .highlight {
+            color: var(--color-accent);
+            font-style: italic;
+        }
+
+        /* REVIEWS */
+        .review-card {
+            border-top: 1px solid #e0e0e0;
+            padding-top: 24px;
+            margin-bottom: 48px;
+        }
+
+        .review-meta {
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .stars {
+            color: var(--color-accent);
+            letter-spacing: 2px;
+        }
+
+        .review-text {
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--color-dark);
+            color: var(--color-bg);
+            padding: var(--spacing-section) var(--spacing-container);
+            text-align: center;
+            border-top: 4px solid var(--color-accent);
+        }
+
+        .footer-info {
+            margin-bottom: 32px;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .footer-cta {
+            font-size: 2rem;
+            margin-bottom: 24px;
+            display: block;
+            color: var(--color-accent);
+        }
+
+        /* MOBILE NAV OVERLAY */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100vh;
+            background: var(--color-dark);
+            z-index: 999;
+            transition: 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu a {
+            font-size: 2rem;
+            color: var(--color-bg);
+            margin: 20px 0;
+            font-family: var(--font-serif);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            :root {
+                --spacing-container: 24px;
+                --spacing-section: 80px;
+            }
+            
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.8rem; }
+            
+            .hero {
+                height: 80vh;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
+
+    <!-- Header -->
     <header>
-      <a href="/" class="logo">T3.SWISS</a>
-      <nav><a href="index.html">HOME</a> | <a href="sitemap.xml">SITEMAP</a></nav>
-    </header>
-    <main>
-      <div class="meta-tag">SWISS ACCENTED GRID SYSTEM</div>
-      <h1>서버 웜업 리서치 및 기술 인프라 저널</h1>
-      <div class="content">
-        환영합니다. 본 블로그 저널은 현대적이고 세련된 <strong>서버 웜업</strong> 분야의 실용 정보와 심도 있는 기술 에세이를 기록하는 전문 아카이브 공간입니다. 아래의 엄선된 아티클 리스트를 통해 다양한 인사이트를 확인하시기 바랍니다.
-      </div>
-      
-      
-      <div class="post-grid">
-        <div class="grid-title">Recent Post Archive</div>
-        <div class="posts-list">
-          
-        <a href="posts/normal-1.html" class="post-card">
-          <h3>서버 웜업: 서버 웜업: IP 신뢰도를 높이는 기술</h3>
-          <p>새로 할당받은 IP 평판을 신뢰할 수 있는 수준으로 안전하게 올리기 위해 발송량을 단계별로 제어하는 웜업 가이드는 이메일 및 대량 인프라 솔루션 구동의 초석입니다. 스팸 차단 시스...</p>
-        </a>
-      
-
-        <a href="posts/normal-2.html" class="post-card">
-          <h3>서버 웜업: 서버 웜업: 메일 인프라 빌드 요령</h3>
-          <p>완벽한 이메일 발송 인프라 구축의 기본은 SPF, DKIM, DMARC 등의 인증 방식 DNS 레코드를 철저히 셋업하는 일입니다. 인증이 누락되면 아무리 정밀하게 웜업을 진행하더라...</p>
-        </a>
-      
-
-        <a href="posts/normal-3.html" class="post-card">
-          <h3>서버 웜업: 서버 웜업: 트래픽 제어 시스템 구축</h3>
-          <p>인프라 엔지니어들이 가장 자주 실수하는 것은 트래픽 서지 제어를 누락하는 것입니다. 웜업 기간에는 로컬 큐에 메일이 쌓이지 않도록 주기적으로 쓰로틀링(Throttling)을 걸어 ...</p>
-        </a>
-      
-
-        <a href="posts/juice-1.html" class="post-card">
-          <h3>서버 웜업 마니아들에게 강력 추천하는 마포 셔츠룸 알짜배기 리스트</h3>
-          <p>이메일 대량 발송 서버 웜업을 진행하면서 도달률의 기술적 균형점을 분석하다 보면, 결국 강력하고 독보적인 성과 전이를 위해 최신 트렌드를 파악하는 안목의 중요성을 체감하게 됩니다....</p>
-        </a>
-      
-
-        <a href="posts/juice-2.html" class="post-card">
-          <h3>서버 웜업 마니아들에게 강력 추천하는 마포 셔츠룸 알짜배기 리스트</h3>
-          <p>이메일 대량 발송 서버 웜업을 진행하면서 도달률의 기술적 균형점을 분석하다 보면, 결국 강력하고 독보적인 성과 전이를 위해 최신 트렌드를 파악하는 안목의 중요성을 체감하게 됩니다....</p>
-        </a>
-      
+        <div class="logo">Momcafe</div>
+        <div class="nav-btn" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
-      </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#about" onclick="toggleMenu()">About</a>
+        <a href="#experience" onclick="toggleMenu()">Experience</a>
+        <a href="#reviews" onclick="toggleMenu()">Reviews</a>
+        <a href="tel:010-6279-0862" onclick="toggleMenu()">Reserve Now</a>
+    </div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <span class="hero-subtitle">Mapo District • Seogyo-dong</span>
+                <h1>마포 셔츠룸의<br>새로운 정의를 내리다</h1>
+                <p style="color: rgba(250,250,245,0.8); max-width: 500px; margin: 0 auto;">
+                    평범한 유흥은 잊으시오.这里是 오직 완성도를 추구하는 당신을 위한 공간입니다.
+                </p>
+                <a href="tel:010-6279-0862" class="btn-cta">Reserve Your Night</a>
+            </div>
+        </section>
+
+        <!-- Narrative Section 1 -->
+        <section id="about" class="section container">
+            <div class="editorial-block">
+                <h2>Why Momcafe?</h2>
+                <p class="drop-cap">
+                    마포구 서교동, 이곳은 단순히 술을 마시는 곳이 아닙니다. 이곳은 감성이 교차하고 비즈니스의 네고시에이션이 이루어지는 살롱입니다. 기존의 마포 셔츠룸이 보여준 안일함은 더 이상 통하지 않습니다. 우리는 '보여주기' 위한 공간이 아닌, '머물고 싶은' 공간을 설계했습니다.
+                </p>
+                <p>
+                    화려한 네온사인과 싸구려 조명? 그런 것은 배제했습니다. 우리는 <span class="highlight">어둠의 미학</span>과 <span class="highlight">골드의 품격</span>을 결합했습니다. 당신이 이 문을 여는 순간, 외부의 소음은 차단되고 오직 당신과 당신의 중요한 순간만이 존재하게 됩니다.
+                </p>
+            </div>
+        </section>
+
+        <!-- Narrative Section 2 -->
+        <section id="experience" class="section container">
+            <div class="editorial-block">
+                <h2>The Uncompromising Standard</h2>
+                <p>
+                    마포 셔츠룸을 검색하는 당신에게 묻습니다. 무엇을 원하십니까? 어설픈 환대입니까, 아니면 완벽한 케어입니까? 우리Momcafe 는 후자만을 제공합니다.
+                </p>
+                <p>
+                    1. <strong>프라이버시의 절대성:</strong> 철저한 보안 시스템과 독립된 동선으로 당신의 방문은 누구에게도 알려지지 않습니다.<br>
+                    2. <strong>선별된 인재:</strong> 외모뿐만 아니라 교양과 대화의 품격을 갖춘 멤버만이 당신을 맞이합니다.<br>
+                    3. <strong>압도적인 룸 컨셉:</strong> every detail has been curated. From the texture of the sofa to the ambient scent, everything speaks luxury.
+                </p>
+                <p>
+                    마포구 내에서 이 정도 수준의 <span class="highlight">마포 룸</span>을 찾아보는 것은 시간 낭비일 뿐입니다. 우리는 이미 정점에 서 있습니다.
+                </p>
+            </div>
+        </section>
+
+        <!-- UGC Reviews -->
+        <section id="reviews" class="section container">
+            <h2>Voices of The Elite</h2>
+            
+            <div class="review-card">
+                <div class="review-meta">
+                    <span>Kim C.</span>
+                    <span class="stars">★★★★★</span>
+                    <span>2023.10.12</span>
+                </div>
+                <p class="review-text">
+                    "마포 셔츠룸은 다 가봤다고 생각했는데 여기는 차원이 다르네요. 분위기가 너무 고급스럽고 매니저분들 케어가 정말 프로페셔널합니다. 중요한 미팅 장소로 강력 추천합니다."
+                </p>
+            </div>
+
+            <div class="review-card">
+                <div class="review-meta">
+                    <span>Park J.H.</span>
+                    <span class="stars">★★★★★</span>
+                    <span>2023.11.05</span>
+                </div>
+                <p class="review-text">
+                    "서교동 근처에서 이런 퀄리티의 룸을 찾기 힘들었습니다. 인테리어도 취향 저격이고, 무엇보다 프라이버시 보호가 철저해서 안심하고 이용할 수 있었습니다. 다시 올 예정입니다."
+                </p>
+            </div>
+
+            <div class="review-card">
+                <div class="review-meta">
+                    <span>Lee S.W.</span>
+                    <span class="stars">★★★★★</span>
+                    <span>2023.12.20</span>
+                </div>
+                <p class="review-text">
+                    "단골이 되었습니다. 마포구에서 비즈니스 접대할 때 여기만큼 만족스러운 곳이 없어요. 술 한 잔의 가치가 다른 곳입니다."
+                </p>
+            </div>
+        </section>
+
+        <!-- Closing CTA -->
+        <section class="section container" style="text-align: center;">
+            <h2 style="border:none; font-size: 2.5rem;">Are You Ready?</h2>
+            <p>
+               犹豫하지 마십시오. 최고의 밤은 준비된 자에게만 허락됩니다.<br>
+                지금 바로 문의하십시오.
+            </p>
+            <a href="tel:010-6279-0862" class="btn-cta" style="border-color: #1a1a1a; color: #1a1a1a;">010-6279-0862</a>
+        </section>
     </main>
-    <footer>
-      <div>&copy; 2026 T3.SWISS. ALL RIGHTS RESERVED.</div>
+
+    <!-- Footer -->
+    
+
+
+<!-- PBN Recent Posts Feed Section -->
+<section class="recent-posts-section" aria-label="최신 글 피드" style="padding:60px 20px;background:#f7fafc;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0">
+  <div style="max-width:1100px;margin:0 auto">
+    <h3 style="font-size:1.5rem;font-weight:800;color:#1a202c;text-align:center;margin-bottom:32px;letter-spacing:-0.025em">📝 최신 관련 포스트</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px">
+      
+    <article class="recent-post-card" style="background:#ffffff;border-radius:16px;padding:24px;box-shadow:0 4px 20px rgba(0,0,0,0.04);border:1px solid #edf2f7;transition:transform 0.3s ease,box-shadow 0.3s ease;display:flex;flex-direction:column;justify-content:space-between;min-height:220px" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 12px 24px rgba(0,0,0,0.08)'" onmouseout="this.style.transform='none';this.style.boxShadow='0 4px 20px rgba(0,0,0,0.04)'">
       <div>
-        <a href="sitemap.xml">SITEMAP</a> | 
-        <a href="#">PRIVACY</a> | 
-        <a href="#">DISCLAIMER</a>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:0.8rem;color:#718096">
+          <span>⚖️ COMPARE</span>
+          <time datetime="2026-06-10">2026-06-10</time>
+        </div>
+        <h4 style="font-size:1.1rem;font-weight:700;color:#1a202c;margin-bottom:8px;line-height:1.4">창작한 제목</h4>
+        <p style="font-size:0.875rem;color:#4a5568;line-height:1.6;margin-bottom:16px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;text-overflow:ellipsis">### 구체적 니치 콘텐츠 작성 #### 주제한샘 리모델링 패키지의 실제 원가 대비 마진율과 협상 가능한 할인 폭 #### 맥락인테리어·집꾸미기 마이너 팁 / 페인트 조색 차이 #### 규칙- 0. **관점 강제**: 당신은 "건축사"의 시점에서 "건축법 위반인데도 다</p>
       </div>
-    </footer>
+      <a href="posts/compare-002-1i1avzs.html" style="align-self:flex-start;text-decoration:none;color:#3182ce;font-size:0.9rem;font-weight:600;transition:color 0.2s" onmouseover="this.style.color='#2b6cb0'" onmouseout="this.style.color='#3182ce'">자세히 보기 →</a>
+    </article>
+    <article class="recent-post-card" style="background:#ffffff;border-radius:16px;padding:24px;box-shadow:0 4px 20px rgba(0,0,0,0.04);border:1px solid #edf2f7;transition:transform 0.3s ease,box-shadow 0.3s ease;display:flex;flex-direction:column;justify-content:space-between;min-height:220px" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 12px 24px rgba(0,0,0,0.08)'" onmouseout="this.style.transform='none';this.style.boxShadow='0 4px 20px rgba(0,0,0,0.04)'">
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:0.8rem;color:#718096">
+          <span>⭐ REVIEW</span>
+          <time datetime="2026-06-10">2026-06-10</time>
+        </div>
+        <h4 style="font-size:1.1rem;font-weight:700;color:#1a202c;margin-bottom:8px;line-height:1.4">마포 셔츠룸 처음 알아볼 때 실제로 많이 묻는 질문 5가지</h4>
+        <p style="font-size:0.875rem;color:#4a5568;line-height:1.6;margin-bottom:16px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;text-overflow:ellipsis">## 제목: 창작한 제목"특목고 입시 내신 등급 분석: 내실 있는 비교를 위한 갈등" 아, 진짜... 특목고 입시에서 내신 반영 비율이 학교별로 다른 실제 수치가 무엇인지 확인해보자. 이 글에서는 합격생들의 실제 내신 등급 분포와 그에 따른 차이점을 중심으로, 학원 원</p>
+      </div>
+      <a href="posts/qa-001-1i1avzs.html" style="align-self:flex-start;text-decoration:none;color:#3182ce;font-size:0.9rem;font-weight:600;transition:color 0.2s" onmouseover="this.style.color='#2b6cb0'" onmouseout="this.style.color='#3182ce'">자세히 보기 →</a>
+    </article>
+    </div>
   </div>
+</section>
+<footer>
+        <a href="tel:010-6279-0862" class="footer-cta">010-6279-0862</a>
+        <div class="footer-info">
+            <p>Seogyo-dong, Mapo-gu, Seoul</p>
+            <p>Business Hours: 18:00 - Late</p>
+        </div>
+        <p style="font-size: 0.7rem; opacity: 0.5;">
+            &copy; 2024 Momcafe Mapo. All Rights Reserved.<br>
+            Designed for the Elite.
+        </p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
